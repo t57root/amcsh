@@ -102,7 +102,6 @@ int worker(fd){
         FD_ZERO( &rd );
         FD_SET( 0, &rd );
         FD_SET( fd, &rd );
-
         if( select( fd + 1, &rd, NULL, NULL, NULL ) < 0 ){
             if (errno == EINTR)
                 continue;
@@ -111,7 +110,7 @@ int worker(fd){
         }
 
         if( FD_ISSET( fd, &rd ) ){
-            if ((ret = recv(fd , message, BUFSIZ,0)) > 0){
+            if ((ret = wrecv(fd , message)) > 0){
                 ret=write(1, &message, ret);
                 if(ret<=0){
                     perror("write");
@@ -204,7 +203,8 @@ int main(int argc,char **argv)
         " #    #  #    #  #    #  #    #  #    #\n"
         " #    #  #    #   ####    ####   #    #\n\n"
         "[ amcsh ] - A More Comfortable SHell\n"
-        "by xxx <xxx@openwill.me>\e[m\n\n"
+        "by t57root @ openwill.me\n"
+        "<t57root@gmail.com>  [www.HackShell.net]\e[m\n\n"
         "Usage: %s {listen|connect} ip port\n"
         "    listen:\tListen at ip:port for connection as a server (Reverse connection mode)\n"
         "    connect:\tConnect to ip:port as a client (Bind port mode)\n\n", argv[0]);

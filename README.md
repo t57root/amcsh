@@ -17,7 +17,7 @@ by t57root @ openwill.me
 ###Features:
 
 * Full pty support: VIM, SSH, readline
-* Authentication support: pre-shared password / one-time password
+* Authentication support: pre-shared password / one-time password(based on google authenticator)
 * Reverse connection / Bind port 
 * Fake argv: Fake CMD in ps,netstat
 
@@ -27,7 +27,7 @@ by t57root @ openwill.me
 
 >>All configurable variables can be found in amcsh.h.
 
->>More details about installation at [This link](http://example.net/)
+>>Check HOWTO.md for more details.
 
 * Compile:
 

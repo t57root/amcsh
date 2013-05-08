@@ -46,7 +46,7 @@ void base32_decode(char *str,char *binary){
 
 void getotp(char *key,int keylen, int timestamp,char *pwd){
     char *t = malloc(2*sizeof(int));
-    memset(t,0,sizeof(int));
+    memset(t,0,2*sizeof(int));
     char *bp = (char *)&timestamp;
     int i = 0;            
     for(i=0;i<4;i++){     
@@ -77,6 +77,7 @@ void get_otp(char *pwd){
     int padding,i;
     if((padding = otpLength - strlen(pwd))>0){
         char *otp = malloc(7);
+        memset(otp,0,7);
         for(i=0;i<padding;i++){
             otp[i]='0';
         }

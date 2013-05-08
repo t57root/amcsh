@@ -15,7 +15,8 @@
 int otpLength = 6;
 char *lut = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
-int strpos(char *str,char find){
+int strpos(char *str,char find)
+{
     int i=0;
     while(str[i]){
         if(str[i]==find)
@@ -26,7 +27,8 @@ int strpos(char *str,char find){
     return i;
 }
 
-void base32_decode(char *str,char *binary){
+void base32_decode(char *str,char *binary)
+{
     int l = strlen(str);
     int n=0,i,j=0;
     int c = 0;
@@ -44,7 +46,8 @@ void base32_decode(char *str,char *binary){
     }
 }
 
-void getotp(char *key,int keylen, int timestamp,char *pwd){
+void getotp(char *key,int keylen, int timestamp,char *pwd)
+{
     char *t = malloc(2*sizeof(int));
     memset(t,0,2*sizeof(int));
     char *bp = (char *)&timestamp;
@@ -63,7 +66,8 @@ void getotp(char *key,int keylen, int timestamp,char *pwd){
     sprintf(pwd,"%d",ret);
 }
 
-void get_otp(char *pwd){
+void get_otp(char *pwd)
+{
     time_t now;
     time(&now);
     int timestamp = (int)now/30;

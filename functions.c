@@ -2,7 +2,8 @@
 #include <netinet/in.h>
 #include <stdint.h>
 
-int full_send(int fd,void *buf,int size){
+int full_send(int fd,void *buf,int size)
+{
     int ret,total=0;
     while(size){
         ret=send(fd, buf, size,0);
@@ -14,7 +15,8 @@ int full_send(int fd,void *buf,int size){
     return total;
 }     
 
-int full_recv(int fd,void *buf,int size){
+int full_recv(int fd,void *buf,int size)
+{
     int ret,total=0;
     while(size){
         ret=recv(fd, buf, size,0);
@@ -26,7 +28,8 @@ int full_recv(int fd,void *buf,int size){
     return total;
 }                                            
 
-int wsend(int fd,void *buf,int size){
+int wsend(int fd,void *buf,int size)
+{
     int ret;
     ret = full_send(fd, &size, sizeof(int32_t));
     if(ret<0) return ret;
@@ -34,7 +37,8 @@ int wsend(int fd,void *buf,int size){
     return ret;
 }     
 
-int wrecv(int fd,void *buf){
+int wrecv(int fd,void *buf)
+{
     int ret,size;
     ret=full_recv(fd, &size, sizeof(int32_t));
     if(ret<=0) return ret;

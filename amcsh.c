@@ -49,7 +49,8 @@ void sendws()
     wsend(masterfd, &winch, sizeof(winch));
 }
 
-int worker(fd){
+int worker(fd)
+{
     masterfd=fd;
     fd_set rd;
     int len,ret;
@@ -143,7 +144,8 @@ int worker(fd){
     return 0;
 }
 
-int amcsh_connect(char *addr, char *port){
+int amcsh_connect(char *addr, char *port)
+{
     struct sockaddr_in server_addr;
 
     server_addr.sin_family      = AF_INET;
@@ -161,7 +163,8 @@ int amcsh_connect(char *addr, char *port){
     return 0;
 }
 
-int amcsh_listen(char *addr, char *port){
+int amcsh_listen(char *addr, char *port)
+{
     int n;
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;

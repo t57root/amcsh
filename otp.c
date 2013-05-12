@@ -1,6 +1,7 @@
 /*                                 
  *  otp.c - one-time password generator
  *  t57root@gmail.com              
+ *  lastest version @ https://github.com/t57root/amcsh
  *  openwill.me / www.hackshell.net
  */                                
 #include <time.h>
